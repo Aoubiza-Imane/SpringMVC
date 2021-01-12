@@ -1,8 +1,6 @@
 package galerie.entity;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
-import java.time.temporal.ChronoUnit;
 import javax.persistence.*;
 import lombok.*;
 
@@ -11,26 +9,26 @@ import lombok.*;
 // cf. https://examples.javacodegeeks.com/spring-boot-with-lombok/
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
 @Entity // Une entité JPA
-public class Galerie {
+public class Personne {
     @Id  @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
 
-    @Column(unique=true)
     @NonNull
     private String nom;
-   
-    @NonNull
+    
+    @Column(unique=true)
     private String adresse;
     
-    @OneToMany(mappedBy = "organisateur")
-    List<Exposition> evenements = new LinkedList<>();
+    @OneToMany(mappedBy = "client")
+    @ToString.Exclude
+    private List<Transaction> achats = new LinkedList<>();
     
-    public float CAannuel(int annee) {
+    public float budgetArt(int annee) {
         // Une implémentation en utilisant l'API Stream API.
         // cf. https://www.baeldung.com/java-stream-filter-lambda
-        return evenements.stream()
-                .filter( expo -> expo.getDebut().getYear() == annee) // On filtre sur l'annee
-                .map(expo -> expo.CA()) // On garde le CA
+        return achats.stream()
+                .filter( achat -> achat.getVenduLe().getYear() == annee) // On filtre sur l'annee
+                .map(achat -> achat.getPrixVente()) // On garde le prix de vente
                 .reduce(0f, Float::sum); // On additionne
-    }
+    }    
 }

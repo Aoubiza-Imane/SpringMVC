@@ -10,6 +10,7 @@
             </goals>
             <properties>
  			<spring-boot.run.jvmArguments>-noverify -XX:TieredStopAtLevel=1</spring-boot.run.jvmArguments>
+ 			<spring-boot.run.profiles>dev</spring-boot.run.profiles>
             </properties>
         </action>
         <action>
