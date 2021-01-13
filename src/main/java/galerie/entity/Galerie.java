@@ -26,11 +26,18 @@ public class Galerie {
     List<Exposition> evenements = new LinkedList<>();
     
     public float CAannuel(int annee) {
-        // Une implémentation en utilisant l'API Stream API.
+        float result = 0.0f;
+        for (Exposition evenement : evenements)
+            if (evenement.getDebut().getYear() == annee)
+                result += evenement.CA();
+        return result;
+        // Peut s'écrire en utilisant l'API Stream 
         // cf. https://www.baeldung.com/java-stream-filter-lambda
+        /*
         return evenements.stream()
                 .filter( expo -> expo.getDebut().getYear() == annee) // On filtre sur l'annee
                 .map(expo -> expo.CA()) // On garde le CA
                 .reduce(0f, Float::sum); // On additionne
+        */
     }
 }

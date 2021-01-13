@@ -30,9 +30,13 @@ public class Exposition {
     private List<Transaction> ventes = new LinkedList<>();
     
     public float CA() {
-        // Une implémentation en utilisant l'API Stream API.
+        float result =0.0f;
+        for (Transaction vente : ventes)
+            result += vente.getPrixVente();
+        return result;
+        // Ca peut s'écrire en une seule ligne avec l'API Stream API.
         // cf. https://www.baeldung.com/java-stream-sum
-        return ventes.stream().map(v -> v.getPrixVente()).reduce(0f, Float::sum);
+        // return ventes.stream().map(vente -> vente.getPrixVente()).reduce(0f, Float::sum);
     }
 
 }
