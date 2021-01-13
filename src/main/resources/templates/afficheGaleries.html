@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<!--/* 
+	Le contrôleur transmet deux informations à cette vue :
+		- galeries : la liste des galeries à afficher
+		- message : un éventuel message d'erreur ou d'information
+*/-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Liste des galeries</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css"/>	
+	</head>
+	<body>
+		<h1>Les galeries et leurs expositions</h1>
+		<!--/* On appelle l'URL 'add' du contôleur */-->
+		<a th:href="@{add}" href='formulaireGalerie.html'>Ajouter une galerie</a>
+		<!--/* On affiche un éventuel message d'erreur */-->
+		<h3 th:text="${message}">Message de succès ou d'erreur</h3>				
+		<ul>
+			<!--/* Pour chaque catégorie gdans la liste 'galeries' transmise par le contrôleur */-->
+			<li th:each="g: ${galeries}">
+				Nom: <em th:text="${g.nom}">Le nom de la galerie</em>,
+				Adresse: <em th:text="${g.adresse}">L'adresse de la galerie</em>
+                                <ul>
+                			<li th:each="e: ${g.evenements}" th:text='${e.intitule}'>
+                                            
+                                        </li>
+                                </ul>
+			</li>
+		</ul>
+		<hr/>
+		<a th:href="@{/}" href="../static/index.html">Retour au menu</a>
+		<hr/>
+	</body>
+</html>

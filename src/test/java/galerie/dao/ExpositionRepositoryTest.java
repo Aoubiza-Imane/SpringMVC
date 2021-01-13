@@ -32,4 +32,21 @@ public class ExpositionRepositoryTest {
         assertEquals(3000.03f, expositionDAO.chiffreAffairePour(idExposition), 0.001f, 
                 "Le CA de cette exposition est de 3000.03f" );
     }
+    
+    @Test // On utilise les données de 'data.sql' qui sont pré-chargées
+    public void onSaitCalculerLeCADuneExpositionAvecJointure() {
+        String intitule = "Painters' painters";
+        log.info("On calcule le CA de l'exposition {} en JPQL", intitule);
+        assertEquals(3000.03f, expositionDAO.chiffreAffairePour(intitule), 0.001f, 
+                "Le CA de cette exposition est de 3000.03f" );
+    }
+
+    @Test // On utilise les données de 'data.sql' qui sont pré-chargées
+    public void renvoieNullSiPasDEnregistrement() {
+        int idExposition = 999;
+        log.info("On calcule le CA de l'exposition {} en JPQL", idExposition);
+        assertNull(expositionDAO.chiffreAffairePour(idExposition),
+            "Cette expo n'existe pas, le résultat est null, et non pas 0.0f" );
+    }
+
 }
