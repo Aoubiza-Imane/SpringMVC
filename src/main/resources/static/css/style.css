@@ -91,7 +91,9 @@ input[type=checkbox]{
 }
 
 /* BUTTONS */
-input[type=submit]{
+input[type=submit],
+input[type=reset]
+{
 	padding-top:12px;
 	padding-bottom:12px;
 	padding-left:12px; 
@@ -102,16 +104,6 @@ input[type=submit]{
 	color: white;
 	border:none;
 }
-/* Reset Button: minimize the appearance */
-input[type=reset]{
-	background-color:transparent;
-	border:none;
-	text-decoration:underline;
-	cursor:pointer;
-	margin:20px 0;
-	color:olive;
-}
-
 /* hovers and tabs */
 input[type=text]:hover,
 input[type=email]:hover{

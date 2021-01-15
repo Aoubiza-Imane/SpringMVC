@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<!--/* 
+	Le contrôleur transmet deux informations à cette vue :
+		- tableaux : la liste des tableaux à afficher
+		- message : un éventuel message d'erreur ou d'information
+*/-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Liste des Tableaux</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css"/>	
+	</head>
+	<body>
+		<h1>Les tableaux</h1>
+		<!--/* On appelle l'URL 'add' du contôleur */-->
+		<a th:href="@{add}" href='formulaireTableau.html'>Ajouter un tableau</a>
+		<!--/* On affiche un éventuel message d'erreur */-->
+		<h3 th:text="${message}">Message de succès ou d'erreur</h3>				
+		<table>
+                    <tr><th>Titre</th><th>Support</th><th>Dimension</th><th>Auteur</th><th>Action</th></tr>
+			<!--/* Pour chaque tableau dans la liste 'tableaux' transmise par le contrôleur */-->
+                        <tr th:each="t: ${tableaux}">
+                                <td th:text="${t.titre}">Le titre du tableau</td>
+                                <td th:text="${t.support}">Huile sur toile</td>
+                                <td th:text="${t.dimension}"> 1m x 2m></td>
+                                <!--/* cf. Elvis operator https://attacomsian.com/blog/thymeleaf-check-if-variable-defined */-->
+                                <td th:text="${t.auteur?.nom} ?: 'Auteur inconnu'">Picasso</td>
+                                <!--/* On met un lien vers l'URL 'delete' en passant l'id du tableau en paramètre */-->
+                                <!--/* cf. https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#link-urls */-->
+                                <td><a th:href="@{delete(id=${t.id})}">Supprimer le tableau n° [[${t.id}]]</a></td>
+                        </tr>
+		</table>
+		<hr/>
+		<a th:href="@{/}" href="../static/index.html">Retour au menu</a>
+		<hr/>
+	</body>
+</html>

@@ -23,6 +23,7 @@
 			<li th:each="g: ${galeries}">
 				Nom: <em th:text="${g.nom}">Le nom de la galerie</em>,
 				Adresse: <em th:text="${g.adresse}">L'adresse de la galerie</em>
+                                <a th:href="@{delete(id=${g.id})}">Supprimer la galerie n° [[${g.id}]]</a>
                                 <ul>
                 			<li th:each="e: ${g.evenements}" th:text='${e.intitule}'>
                                             

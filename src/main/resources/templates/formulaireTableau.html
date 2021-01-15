@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<!--/* 
+        Information transmise par le contrôleur :
+        - tableau : Le tableau à éditer
+        - artistes : la liste des artistes pour pouvoir choisir l'auteur du tableau
+*/-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Ajouter un tableau</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css"/>	
+    </head>
+    <body>
+        <h1>Ajouter un tableau</h1>
+        <!--/* Au revient au contrôleur, avec la méthode POST */-->
+        <!--/* th:object déinit quel est l'objet édité par ce formulaire */-->
+        <form th:object="${tableau}" method="POST" th:action="@{save}">
+            <div class="column">
+                <label for="titre">titre:</label>
+                <!--/* th:field définit quel champ de l'objet est édité par cette zone de saisie */-->
+                <input type="text" th:field="*{titre}" placeholder="Titre du tableau"/>
+                <hr/>
+                <input type="submit" value="Enregistrer" /> <input type="reset" value="Réinitialiser" />
+            </div>
+            <div class="column">
+                <label for="auteur">Auteur:</label>
+                <select th:field="*{auteur}" >
+                    <option value="0">Auteur inconnu</option>
+                    <!--/* On choisit la clé étrangère parmi les artistes */-->
+                    <option th:each="a: ${artistes}" th:value="${a.id}" th:text="${a.nom}">Pablo Picasso</option>
+                </select>
+                <label for="support">Support:</label>
+                <input type="text" th:field="*{support}" placeholder="support, ex: Huile sur toile"/>				
+                <label for="dimension">Dimensions:</label>
+                <input type="text" th:field="*{dimension}" placeholder="dimensions, ex: 1m x 2m"/>				
+            </div>
+        </form>		
+        <hr/>
+        <a th:href="@{/}" href="../static/index.html">Retour au menu</a>
+        <hr/>
+    </body>
+</html>

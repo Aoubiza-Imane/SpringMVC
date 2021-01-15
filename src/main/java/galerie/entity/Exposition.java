@@ -27,6 +27,7 @@ public class Exposition {
     List<Tableau> oeuvres = new LinkedList<>();
     
     @OneToMany(mappedBy = "lieuDeVente")
+    @ToString.Exclude
     private List<Transaction> ventes = new LinkedList<>();
     
     public float CA() {

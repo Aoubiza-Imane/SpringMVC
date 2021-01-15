@@ -15,10 +15,11 @@ INSERT INTO Personne(DTYPE, id, nom, adresse, biographie) VALUES
     ('Artiste',  3, 'Cy Twombly', null, 'né Edwin Parker Twombly Jr. le 25 avril 1928 à Lexington – mort le 5 juillet 2011 à Rome, est un peintre, dessinateur, sculpteur et photographe américain');
 
 INSERT INTO Tableau(id, titre, support, dimension, auteur_id) VALUES
-    (1, 'Guernica', "huile sur toile", "4 m.50 x 3 m. 65", 2),
-    (2, 'Corrida', "huile sur toile","2 m.50 x 1 m. 65", 2),
-    (3, 'Tiznit',  "Acrylique sur bois","12 m x 5 m", 3),
-    (4, 'Lepanto, Part XII', "Acrylique sur bois", "12 m x 5 m" 3);
+    (1, 'Guernica', 'huile sur toile', '4 m.50 x 3 m. 65', 2),
+    (2, 'Corrida', 'huile sur toile','2 m.50 x 1 m. 65', 2),
+    (3, 'Tiznit',  'Acrylique sur bois','12 m x 5 m', 3),
+    (4, 'Lepanto, Part XII', 'Acrylique sur bois', '12 m x 5 m', 3),
+    (5, 'Vierge à l''enfant', 'Huile sur bois', '120cm x 60 cm', NULL);
 
 INSERT INTO Exposition_Oeuvres(accrochages_id, oeuvres_id) VALUES
     (1, 1),

@@ -28,7 +28,7 @@ public class GalerieController {
      * Affiche toutes les catégories dans la base
      *
      * @param model pour transmettre les informations à la vue
-     * @return le nom de la vue à afficher ('showCategories.html')
+     * @return le nom de la vue à afficher ('afficheGaleries.html')
      */
     @GetMapping(path = "show")
     public String afficheToutesLesGaleries(Model model) {
@@ -37,10 +37,10 @@ public class GalerieController {
     }
 
     /**
-     * Montre le formulaire permettant d'ajouter une catégorie
+     * Montre le formulaire permettant d'ajouter une galerie
      *
      * @param galerie initialisé par Spring, valeurs par défaut à afficher dans le formulaire
-     * @return le nom de la vue à afficher ('formulaireCategorie.html')
+     * @return le nom de la vue à afficher ('formulaireGalerie.html')
      */
     @GetMapping(path = "add")
     public String montreLeFormulairePourAjout(@ModelAttribute("galerie") Galerie galerie) {
@@ -48,7 +48,7 @@ public class GalerieController {
     }
 
     /**
-     * Appelé par 'formulaireCategorie.html', méthode POST
+     * Appelé par 'formulaireGalerie.html', méthode POST
      *
      * @param galerie Une galerie initialisée avec les valeurs saisies dans le formulaire
      * @param redirectInfo pour transmettre des paramètres lors de la redirection
@@ -75,15 +75,26 @@ public class GalerieController {
     }
 
     /**
-     * Appelé par le lien 'Supprimer' dans 'showCategories.html'
+     * Appelé par le lien 'Supprimer' dans 'afficheGaleries.html'
      *
-     * @param galerie à partir du code de la galerie transmis en paramètre, Spring fera une requête SQL SELECT pour
+     * @param galerie à partir de l'id de la galerie transmis en paramètre, Spring fera une requête SQL SELECT pour
      * chercher la galerie dans la base
-     * @return une redirection vers l'affichage de la liste des catégories
+     * @param redirectInfo pour transmettre des paramètres lors de la redirection
+     * @return une redirection vers l'affichage de la liste des galeries
      */
     @GetMapping(path = "delete")
-    public String supprimeUneCategoriePuisMontreLaListe(@RequestParam("code") Galerie galerie) {
-        dao.delete(galerie); // Ici on peut avoir une erreur (Si il y a des produits dans cette catégorie par exemple)
+    public String supprimeUneCategoriePuisMontreLaListe(@RequestParam("id") Galerie galerie, RedirectAttributes redirectInfo) {
+        String message = "La galerie '" + galerie.getNom() + "' a bien été supprimée";
+        try {
+            dao.delete(galerie); // Ici on peut avoir une erreur (Si il y a des produits dans cette catégorie par exemple)
+        } catch (DataIntegrityViolationException e) {
+            // violation de contrainte d'intégrité si on essaie de supprimer une galerie qui a des expositions
+            message = "Erreur : Impossible de supprimer la galerie '" + galerie.getNom() + "', il faut d'abord supprimer ses expositions";
+        }
+        // RedirectAttributes permet de transmettre des informations lors d'une redirection,
+        // Ici on transmet un message de succès ou d'erreur
+        // Ce message est accessible et affiché dans la vue 'afficheGalerie.html'
+        redirectInfo.addFlashAttribute("message", message);
         return "redirect:show"; // on se redirige vers l'affichage de la liste
     }
 }

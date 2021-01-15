@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--/* 
 	Information transmise par le contrôleur :
-	- categorie : la catégorie à editer
+	- galerie : la galerie à editer
 */-->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
@@ -13,12 +13,13 @@
 	<body>
 		<h1>Ajouter une galerie</h1>
 		<!--/* Au revient au contrôleur, avec la méthode POST */-->
-		<!--/* th:object déinit quel est l'objet édité par ce formulaire */-->
+		<!--/* th:object définit quel est l'objet édité par ce formulaire */-->
 		<form th:object="${galerie}" method="POST" th:action="@{save}">
 			<div class="column">
-				<!--/* th:field définit quel champ de l'objet est édité par cette zone de saisie */-->
 				<label for="nom">Nom:</label>
+				<!--/* th:field définit quel champ de l'objet est édité par cette zone de saisie */-->
 				<input type="text" th:field="*{nom}" placeholder="Nom de la galerie"/>
+                                <hr/>
 				<input type="submit" value="Enregistrer" /> <input type="reset" value="Réinitialiser" />
 			</div>
 			<div class="column">
