@@ -86,7 +86,7 @@ public class GalerieController {
     public String supprimeUneCategoriePuisMontreLaListe(@RequestParam("id") Galerie galerie, RedirectAttributes redirectInfo) {
         String message = "La galerie '" + galerie.getNom() + "' a bien été supprimée";
         try {
-            dao.delete(galerie); // Ici on peut avoir une erreur (Si il y a des produits dans cette catégorie par exemple)
+            dao.delete(galerie); // Ici on peut avoir une erreur (Si il y a des expositions pour cette galerie par exemple)
         } catch (DataIntegrityViolationException e) {
             // violation de contrainte d'intégrité si on essaie de supprimer une galerie qui a des expositions
             message = "Erreur : Impossible de supprimer la galerie '" + galerie.getNom() + "', il faut d'abord supprimer ses expositions";
