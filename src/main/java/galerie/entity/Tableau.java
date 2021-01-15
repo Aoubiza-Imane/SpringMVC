@@ -16,7 +16,11 @@ public class Tableau {
     private String titre;
 
     @ManyToMany(mappedBy= "oeuvres")
-    List<Exposition> accrochages = new LinkedList<>();
+    private List<Exposition> accrochages = new LinkedList<>();
+    
+    private String support;
+    
+    private String dimension;
 
     @OneToOne(mappedBy = "oeuvre")
     private Transaction vendu;    
