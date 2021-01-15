@@ -61,7 +61,7 @@ public class GalerieController {
             // cf. https://www.baeldung.com/spring-data-crud-repository-save
             dao.save(galerie);
             // Le code de la catégorie a été initialisé par la BD au moment de l'insertion
-            message = "La galerie n° " + galerie.getNom() + " a été correctement enregistrée";
+            message = "La galerie '" + galerie.getNom() + "' a été correctement enregistrée";
         } catch (DataIntegrityViolationException e) {
             // Les noms sont définis comme 'UNIQUE' 
             // En cas de doublon, JPA lève une exception de violation de contrainte d'intégrité
