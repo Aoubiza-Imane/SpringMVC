@@ -21,7 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping(path = "/galerie")
 public class GalerieController {
 
-    @Autowired
+    @Autowired //
     private GalerieRepository dao;
 
     /**
@@ -43,7 +43,7 @@ public class GalerieController {
      * @return le nom de la vue à afficher ('formulaireGalerie.html')
      */
     @GetMapping(path = "add")
-    public String montreLeFormulairePourAjout(@ModelAttribute("galerie") Galerie galerie) {
+    public String montreLeFormulairePourAjout(@ModelAttribute("galerie") Galerie galerie) { //@ModelAtttribute relie le paramètre de la méthode ou son valeur de retour à un attribut du modèle et l'affiche sur la vue du web
         return "formulaireGalerie";
     }
 
@@ -62,7 +62,7 @@ public class GalerieController {
             dao.save(galerie);
             // Le code de la catégorie a été initialisé par la BD au moment de l'insertion
             message = "La galerie '" + galerie.getNom() + "' a été correctement enregistrée";
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) { //on chope une exception
             // Les noms sont définis comme 'UNIQUE' 
             // En cas de doublon, JPA lève une exception de violation de contrainte d'intégrité
             message = "Erreur : La galerie '" + galerie.getNom() + "' existe déjà";

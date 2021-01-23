@@ -1,0 +1,46 @@
+<!DOCTYPE HTML> <!--fichier qui va être utilisé en collaboration avec le modèle par le Thymeleaf Engine
+//Type de template (il existe 6) : HTML -->
+<!--/* 
+        Information transmise par le contrôleur :
+        - galerie : la galerie à editer
+*/-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Ajouter un tableau</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!--on ajuste la largeur à celle de l'appareil-->
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css"/>	
+    </head>
+    <body>
+        <h1>Ajouter un tableau</h1>
+        <!--/* Au revient au contrôleur, avec la méthode POST */-->
+        <!--/* th:object définit quel est l'objet édité par ce formulaire */-->
+        <form th:object="${tableau}" method="POST" th:action="@{save}">
+            <div class="column">
+                <label for="titre">Titre:</label>
+                <!--/* th:field définit quel champ de l'objet est édité par cette zone de saisie */-->
+                <input type="text" th:field="*{titre}" placeholder="Titre du tableau"/>
+                <hr/>
+                <input type="submit" value="Enregistrer" /> <input type="reset" value="Réinitialiser" />
+            </div>
+            <div class="column">
+                <label for="auteur_id">Auteur</label>
+                <select  name="auteur" id="auteur">
+                    <option th:each="a: ${artistes}" th:value="${a.id}">[[${a.nom}]]</option>
+                    <option value="">Auteur inconnu</option>
+                </select>
+            </div>
+            <div class="column">
+                <label for="support">Support:</label>
+                <input type="text" th:field="*{support}" placeholder="support, ex: Huile sur toile"/>				
+            </div>
+            <div class="column">
+                <label for="dimension">Dimensions:</label>
+                <input type="text" th:field="*{dimension}" placeholder="dimensions, ex : 1m x 2m"/>				
+            </div>
+        </form>		
+        <hr/>
+        <a th:href="@{/}" href="../static/index.html">Retour au menu</a>
+        <hr/>
+    </body>
+</html>

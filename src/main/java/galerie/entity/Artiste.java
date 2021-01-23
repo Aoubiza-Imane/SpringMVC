@@ -10,6 +10,6 @@ public class Artiste extends Personne {
     private String biographie;
     
     @OneToMany(mappedBy="auteur")
-    @ToString.Exclude
+    @ToString.Exclude // pour ne pas avoir toute la liste d'infos
     private List<Tableau> oeuvres = new LinkedList<>();
 }

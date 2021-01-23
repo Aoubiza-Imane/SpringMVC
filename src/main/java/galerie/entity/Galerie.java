@@ -26,7 +26,7 @@ public class Galerie {
     List<Exposition> evenements = new LinkedList<>();
     
     public float CAannuel(int annee) {
-        float result = 0.0f;
+        float result = 0.0f; //le f c'est pour convertir en float 
         for (Exposition evenement : evenements)
             if (evenement.getDebut().getYear() == annee)
                 result += evenement.CA();

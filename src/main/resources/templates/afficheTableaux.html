@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<!--/* 
+        Le contrôleur transmet deux informations à cette vue :
+                - tableaux : la liste des tableaux à afficher
+                - message : un éventuel message d'erreur ou d'information
+*/-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Liste des tableaux</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../static/css/style.css"/> <!--on fait appel à un fichier CSS--> 
+    </head>
+    <body>
+        <h1>Les tableaux</h1>
+        <!--/* On appelle l'URL 'add' du contôleur */-->
+        <a th:href="@{add}" href='formulaireTableau.html'>Ajouter un tableau</a>
+        <!--/* On affiche un éventuel message d'erreur */-->
+        <h3 th:text="${message}">Message de succès ou d'erreur</h3>   
+        <table>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Support</th>
+                    <th>Dimension</th>
+                    <th>Auteur</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="t: ${tableaux}">
+                    <td th:text="${t.titre}"></td> <!--le t. fait référence au tableau, pour appeler les caractéristiques correspondants-->
+                    <td th:text="${t.support}"></td>
+                    <td th:text="${t.dimension}"></td>
+                    <td th:text="${t.auteur ne null} ? ${t.auteur.nom} : 'Auteur inconnu'"></td>
+                    <!--<td th:text="${t.auteur?.nom}"></td>-->
+                    <td><a th:href="@{delete(id=${t.id})}">Supprimer le tableau n° [[${t.id}]]</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+        <a th:href="@{/}" href="../static/index.html">Retour au menu</a>
+        <hr/>
+    </body>
+</html>

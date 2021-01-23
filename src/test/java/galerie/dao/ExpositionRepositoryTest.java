@@ -11,16 +11,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.test.context.jdbc.Sql;
 
 @Log4j2 // Génère le 'logger' pour afficher les messages de trace
-@DataJpaTest
+@DataJpaTest //données pour faire le test 
 public class ExpositionRepositoryTest {
 
-    @Autowired
+    @Autowired //ça enlève le besoin d'avoir des getters et les setters
     private ExpositionRepository expositionDAO;
 
     @Test // On utilise les données de 'data.sql' qui sont pré-chargées
     public void onSaitCalculerLeCADuneExpositionEnJava() {
         Exposition painters = expositionDAO.findById(1).orElseThrow();
-        log.info("On calcule le CA de l'exposition {} en java", painters.getIntitule());
+        log.info("On calcule le CA de l'exposition {} en java", painters.getIntitule()); //log ajoute des traitements dans les applications pour permettre l'émission  et le stockage de messages
         assertEquals(3000.03f, painters.CA(), 0.001f, 
                 "Le CA de cette exposition est de 3000.03f" );
     }
